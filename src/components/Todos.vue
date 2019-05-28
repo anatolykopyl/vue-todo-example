@@ -1,5 +1,5 @@
 <template>
-  <draggable v-model="todos" group="people" @start="drag=true" @end="drag=false">
+  <draggable v-model="todos" @start="drag=true" @end="drag=false">
     <div v-bind:key="todo.id" v-for="todo in todos">
       <TodoItem v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)" />
     </div>
