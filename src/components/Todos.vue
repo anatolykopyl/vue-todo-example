@@ -1,14 +1,16 @@
 <template>
-  <draggable v-model="todos" @start="drag=true" @end="drag=false">
-    <div v-bind:key="todo.id" v-for="todo in todos">
-      <TodoItem v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)" />
+  <draggable class="todos" @start="drag=true" @end="drag=false">
+    <div v-bind:key="todo.id" v-for="todo in allTodos">
+      <TodoItem v-bind:todo="todo" v-on:del-todo="delTodo(todo.id)" v-on:toggle-complete="toggleComplete(todo.id)" />
     </div>
   </draggable>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable';
 import TodoItem from "./TodoItem.vue";
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "Todos",
@@ -16,16 +18,16 @@ export default {
     draggable,
     TodoItem
   },
-  props: ["todos"],
   methods: {
-    moveItem(from, to) {
-      this.todos.splice(to, 0, this.todos[from]);
-      this.todos[from] = null;
-    }
-  }
+    ...mapActions(["delTodo", "toggleComplete"]),
+  },
+  computed: mapGetters(["allTodos"])
 }
 </script>
 
 <style scoped>
-
+.todos {
+  width: 400px;
+  margin: auto;
+}
 </style>

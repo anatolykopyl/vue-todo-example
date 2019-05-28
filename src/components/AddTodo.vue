@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form autocomplete="off" @submit.prevent="$emit('add-todo', inputName); inputName = '';" class="addTodo">
+    <form autocomplete="off" @submit.prevent="addTodo(inputName); inputName = '';" class="addTodo">
       <input type="text" v-model="inputName" name="title" placeholder="Название дела..." class="txtField">
       <input type="submit" value="Добавить" class="btn">
     </form>
@@ -8,14 +8,19 @@
 </template>
 
 <script>
-  export default {
-    name: "AddTodo",
-    data() {
-      return {
-        inputName: ''
-      }
+import { mapActions } from "vuex";
+
+export default {
+  name: "AddTodo",
+  data() {
+    return {
+      inputName: ''
     }
+  },
+  methods: {
+    ...mapActions(["addTodo"])
   }
+}
 </script>
 
 <style scoped>
