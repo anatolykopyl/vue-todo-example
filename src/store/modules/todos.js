@@ -34,9 +34,7 @@ const actions = {
 const mutations = {
     toggleComplete(state, id) {
         state.todos.forEach(element => {
-            if (element.id == id) {
-                element.completed = !element.completed
-            }
+            (element.id == id) && (element.completed = !element.completed)
         });
     },
     addTodo(state, n) {

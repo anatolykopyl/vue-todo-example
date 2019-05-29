@@ -1,8 +1,9 @@
 <template>
   <div class="todo-item" v-bind:class='{"is-complete":todo.completed}' v-on:click="$emit('toggle-complete', todo.id)">
     <p>
-      {{todo.name}}
+      {{ todo.name }}
       <button @click="$emit('del-todo', todo.id)" class="delete">&#10060;</button>
+      <br>
     </p>
   </div>
 </template>
